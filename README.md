@@ -2,7 +2,7 @@
 
 [My Notes](notes.md)
 
-A brief description of the application here: This application will be a simplified version of the game hangman. It will allow users to log in, play the game, and keep thrack of their's and other's best scores (in this case the lowest score). This is how it will work.
+A brief description of the application here: This application will be a simplified version of the game hangman. It will allow users to log in, play the game, and keep thrack of their's and other's best scores (in this case the lowest score).
 
 
 > [!NOTE]
@@ -26,7 +26,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Have you ever wanted to play a game of hangman but lack the space to do it? This app will be the perfect thing for you! It will allow you to log into an account to save your scores, play a game of hangman with a 6 letter word, and compare your scores with friends and other users. 
 
 ### Design
 
