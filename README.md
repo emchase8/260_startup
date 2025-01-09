@@ -1,8 +1,8 @@
-# Hangman
+# Mouse and Cheese
 
 [My Notes](notes.md)
 
-A brief description of the application here: This application will be a simplified version of the game hangman. It will allow users to log in, play the game, and keep thrack of their's and other's best scores (in this case the lowest score).
+A brief description of the application here: This application will be a simplified version of the game hangman, presented through the lense of a mouse going after cheese. It will allow users to log in, play the game, and keep thrack of their's and other's best scores (in this case the lowest score).
 
 
 > [!NOTE]
@@ -26,7 +26,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Elevator pitch
 
-Have you ever wanted to play a game of hangman but lack the space to do it? This app will be the perfect thing for you! It will allow you to log into an account to save your scores, play a game of hangman with a 6 letter word, and compare your scores with friends and other users. 
+Have you ever wanted to play a game of hangman but lack the space to do it? This app will be the perfect thing for you! Enjoy a version of hangman that instead has a mouse going after a piece of cheese. Guess the word before the cheese gets got. This app will allow you to log into an account to save your scores, play a game of hangman with a 6 letter word, and compare your scores with friends and other users. 
 
 ### Design
 
