@@ -1,4 +1,4 @@
-# Your startup name here
+# Hangman
 
 [My Notes](notes.md)
 
