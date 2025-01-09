@@ -2,7 +2,7 @@
 
 [My Notes](notes.md)
 
-A brief description of the application here: This application will be a simplified version of the game hangman. It will allow users to log in, play the game, and keep thrack of their's and other's best scores (in this case the lowest score).
+A brief description of the application here: This application will be a simplified version of the game hangman. It will allow users to log in, play the game, and keep thrack of their's and other's best scores (in this case the lowest score). This is how it will work.
 
 
 > [!NOTE]
