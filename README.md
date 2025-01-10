@@ -59,12 +59,16 @@ sequenceDiagram
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - Uses html to structure pages. Four html pages for login, play, scores and about the web application. Hyperlinks between each page.
+- **CSS** - Styling of application that looks good on multiple web sizes. Good use of whitespace, color, contrast and updating images.
+- **React** - Login, guess inputs, display of correct and incorrect guesses, and use of React for routing and components.
+- **Service** - Backend for:
+    - login
+    - random word generation
+    - recieving and submitting guesses
+    - submitting scores
+- **DB/Login** - Store users and scores in database. Register and login users. Credientals stored in secure database and cannot play unless logged in.
+- **WebSocket** - High score of each player updates for all others.
 
 ## 🚀 AWS deliverable
 
