@@ -39,7 +39,6 @@ sequenceDiagram
     actor Player 1
     actor Player 2
     actor Player 3
-    actor Server
     Player 1->>Server: Player 1 score
     Server-->>Player 2: Player 1 score
     Server-->>Player 3: Player 1 score
