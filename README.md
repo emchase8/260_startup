@@ -32,13 +32,20 @@ Have you ever wanted to play a game of hangman but lack the space to do it? This
 
 ![Design image](design_image.jpeg)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Here is a sequence diagram that shows how player scores will interact with the backend in order to be viewed by others.
 
 ```mermaid
 sequenceDiagram
-    actor You
-    actor Website
-    You->>Website: Replace this with your design
+    actor Player 1
+    actor Player 2
+    actor Player 3
+    actor Server
+    Player 1->>Server: Player 1 score
+    Server-->>Player 2: Player 1 score
+    Server-->>Player 3: Player 1 score
+    Player 2->>Server: Player 2 score
+    Server-->>Player 1: Player 2 score
+    Server-->>Player 3: Player 2 score
 ```
 
 ### Key features
