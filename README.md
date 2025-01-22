@@ -80,15 +80,15 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - I have four html pages: index, game, scoreboard and info. They are all linked to each other.
+- [x] **Proper HTML element usage** - Each html page properly uses the following tags: body, nav, main, header, and footer.
+- [x] **Links** - Each html page contains a link to each other page as well as my github repository.
+- [x] **Text** - There is sufficient text to explain the game and acting as placholders for other technologies.
+- [x] **3rd party API placeholder** - If I can get it to work, the word the player is trying to guess will be randomly selected by a third party API, otherwise it will be a quote or image on the about page.
+- [x] **Images** - There is a game image that will be able to update once new technologies are intorduced on the game page, and one other image on the about page.
+- [x] **Login placeholder** - There are input boxes for an email and password on the starting page, as well as a submit button for both login and to create an account.
+- [x] **DB data placeholder** - On the game page, there is a spot where live updates will be made avaliable to players and the scoreboard also reflects the current standings accourding to the database.
+- [x] **WebSocket placeholder** - On the game page, there is a spot where live updates will be made avaliable to players.
 
 ## 🚀 CSS deliverable
 
