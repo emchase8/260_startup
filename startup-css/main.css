@@ -1,0 +1,22 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    color: lightgray;
+}
+
+body {
+    background-color: rgb(54, 71, 97);
+}
+
+header {
+    background-color: gray;
+    padding: 1em;
+    margin: 1em 0;
+    border-radius: 5px;
+}
+
+footer {
+    background-color: gray;
+    padding: 1em;
+    margin: 1em 0;
+    border-radius: 5px;
+}
