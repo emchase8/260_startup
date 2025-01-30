@@ -8,6 +8,12 @@
 .section {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.guess {
+    display: flex;
+    flex-direction: column;
 }
 
 .data {
