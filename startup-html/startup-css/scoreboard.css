@@ -1,0 +1,14 @@
+.first {
+    color: goldenrod !important;
+    font-weight: bold;
+}
+
+.second {
+    color: silver !important;
+    font-weight: bold;
+}
+
+.third {
+    color: rgb(205, 127, 50) !important;
+    font-weight: bold;
+}
