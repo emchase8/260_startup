@@ -96,10 +96,10 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 - [x] **Header, footer, and main content body** - Header, footer and main css code found on main.css and then overwritten as needed.
 - [x] **Navigation elements** - Navigation bar is the same across all 4 pages using bootstrap.
-- [x] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [x] **Responsive to window resizing** - All elements on all pages should be accessable whatever the window size.
+- [x] **Application elements** - All buttons and input boxes are styled and functional.
+- [x] **Application text content** - All text elements are styled and responsive.
+- [x] **Application images** - All images are styled and responsive.
 
 ## 🚀 React part 1: Routing deliverable
 
