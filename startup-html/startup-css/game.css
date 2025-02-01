@@ -2,7 +2,6 @@
     max-width: 50%;
     height: auto;
     display: flex;
-    flex: 3;
 }
 
 .section {
@@ -14,9 +13,24 @@
 .guess {
     display: flex;
     flex-direction: column;
+    padding: 15px;
 }
 
 .data {
     display: flex;
+    flex-direction: column;
     flex: 1;
+}
+
+.guesses {
+    background-color: rgb(252, 186, 3);
+    padding: 15px;
+    text-align: center;
+    border-radius: 5px;
+    margin: 15px;
+}
+
+.word {
+    color:white;
+    font-weight: bold;
 }
