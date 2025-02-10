@@ -14,7 +14,7 @@ export function Game() {
               </ul>
           </div>
           <br />
-          <img src="../../public/starting_image.png" alt="game image" className="responsive"></img>
+          <img src="starting_image.png" alt="game image" className="responsive"></img>
       </div>
       <br />
       <div className="section">
