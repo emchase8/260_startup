@@ -14,7 +14,7 @@ export default function App() {
             <header>
                 <nav className="navbar bg-dark navbar-expand bg-body-tertiary" data-bs-theme="dark">
                     <div className="container-fluid">
-                        <a className="navbar-brand" href="#">Navbar</a>
+                        <a className="navbar-brand" href="#">Hang Cheese</a>
                         <div className="navbar-nav" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item">
