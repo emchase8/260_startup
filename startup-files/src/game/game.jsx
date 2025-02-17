@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
 import './game.css';
 import '../app.css';
 
@@ -31,7 +32,8 @@ export function Game() {
                   <span className="input-group-text">Guess: </span>
                   <input className="form-control" type="text" placeholder="type your guess here" />
               </div>
-              <button className="btn btn-warning" type="submit">Submit Guess</button>
+              <Button className="btn btn-warning" type="submit" style={{marginBottom: '1em'}}>Submit Guess</Button>
+              <Button className="btn btn-secondary" type="submit">Restart Game</Button>
           </div>
           <div className="guess guesses">Word: <span className="word">__ __ __ __ __ __</span> (3rd party word generator will be used, if I can figure that out)</div>
       </div>
