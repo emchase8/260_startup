@@ -3,7 +3,40 @@ import './scoreboard.css';
 import '../app.css';
 
 export function Score() {
-  return (
+    const [scores, set_scores] = React.useState([]);
+
+    React.useState(() => {
+        const scores_text = localStorage.getItem('scores');
+        if (scores_text) {
+            set_scores(JSON.parse(scores_text));
+        }
+    }, []);
+
+    const scores_rows = [];
+    if (scores.length) {
+        for (const [i, score] of scores.entries()) {
+            let class_name = '';
+            if ((i+1) === 1) class_name = 'first';
+            else if ((i+1) === 2) class_name = 'second';
+            else if ((i+1) === 3) class_name = 'third';
+            scores_rows.push(
+                <tr key={i}>
+                    <td className={class_name}>{i+1}</td>
+                    <td>{score.name.split('@')[0]}</td>
+                    <td>{score.score}</td>
+                    <td>{score.date}</td>
+                </tr>
+            );
+        }
+    } else {
+        scores_rows.push(
+            <tr key='0'>
+                <td colSpan='4'>Be the first to score</td>
+            </tr>
+        );
+    }
+
+    return (
     <main className="text-center container-fluid">
       <table className="table table-warning table-striped table-hover">
           <thead className="table-dark">
@@ -14,38 +47,7 @@ export function Score() {
                   <th>Date</th>
               </tr>
           </thead>
-          <tbody>
-              <tr>
-                  <td className="first">1</td>
-                  <td>Bartholomew</td>
-                  <td>5</td>
-                  <td>January 1, 2025</td>
-              </tr>
-              <tr>
-                  <td className="second">2</td>
-                  <td>Eustence</td>
-                  <td>5</td>
-                  <td>January 2, 2025</td>
-              </tr>
-              <tr>
-                  <td className="third">3</td>
-                  <td>Genevieve</td>
-                  <td>6</td>
-                  <td>December 31, 2024</td>
-              </tr>
-              <tr>
-                  <td>4</td>
-                  <td>Pershepane</td>
-                  <td>7</td>
-                  <td>December 26, 2024</td>
-              </tr>
-              <tr>
-                  <td>5</td>
-                  <td>Vax'ildan</td>
-                  <td>7</td>
-                  <td>December 27, 2024</td>
-              </tr>
-          </tbody>
+          <tbody id="scores">{scores_rows}</tbody>
       </table>
     </main>
   );
