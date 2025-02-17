@@ -3,14 +3,13 @@ import './info.css';
 import '../app.css';
 
 export function Info() {
-  const [quote, set_quote] = React.useState('...loading')
-  const [author, set_author] = React.useState('...loading')
+  const [quote, set_quote] = React.useState('...loading');
+  const [author, set_author] = React.useState('...loading');
 
   React.useEffect(() => {
-    set_quote("Colors fade, temples crumble, empires fall, but wise words endure.")
-    set_author("Edward Thorndike")
-  }
-)
+    set_quote("Colors fade, temples crumble, empires fall, but wise words endure.");
+    set_author("Edward Thorndike");
+  }, []);
   
   return (
     <main className="text-center container-fluid override">

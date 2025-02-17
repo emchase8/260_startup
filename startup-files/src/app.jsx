@@ -6,8 +6,13 @@ import { Login } from './login/login';
 import { Game } from './game/game';
 import { Score } from './score/score';
 import { Info } from './info/info';
+import { AuthState } from './login/AuthState';
 
 export default function App() {
+    const [username, set_username] = React.useState(localStorage.getItem('username') || '');
+    const curr_auth_state = username ? AuthState.Authenticated : AuthState.Unauthenticated;
+    const [authstate, set_authstate] = React.useState(curr_auth_state);
+    
     return (
     <BrowserRouter>
         <div className="body">
@@ -22,16 +27,18 @@ export default function App() {
                                     Login
                                 </NavLink>
                             </li>
+                            {authstate === AuthState.Authenticated && (
                             <li className="nav-item">
                                 <NavLink className='nav-link' to='game'>
                                     Game
                                 </NavLink>
-                            </li>
+                            </li>)}
+                            {authstate === AuthState.Authenticated && (
                             <li className="nav-item">
                                 <NavLink className='nav-link' to='score'>
                                     Scoreboard
                                 </NavLink>
-                            </li>
+                            </li>)}
                             <li className="nav-item">
                                 <NavLink className='nav-link' to='info'>
                                     About
@@ -54,7 +61,7 @@ export default function App() {
                         />} 
                     exact 
                 />
-                <Route path='/game' element={<Game />} />
+                <Route path='/game' element={<Game username = {username} />} />
                 <Route path='/score' element={<Score />} />
                 <Route path='/info' element={<Info />} />
                 <Route path='*' element={<NotFound />} />
