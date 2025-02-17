@@ -44,7 +44,16 @@ export default function App() {
             </header>
     
             <Routes>
-                <Route path='/' element={<Login />} exact />
+                <Route 
+                    path='/' 
+                    element={
+                        <Login 
+                            username = {username}
+                            authstate = {authstate}
+                            on_auth_change = {(username, authstate) => {set_authstate(authstate), set_username(username)}}
+                        />} 
+                    exact 
+                />
                 <Route path='/game' element={<Game />} />
                 <Route path='/score' element={<Score />} />
                 <Route path='/info' element={<Info />} />
