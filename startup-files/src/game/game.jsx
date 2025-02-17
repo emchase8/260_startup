@@ -2,18 +2,13 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import './game.css';
 import '../app.css';
+import {Players} from './players'
 
-export function Game() {
+export function Game(props) {
   return (
     <main className="container-fluid text-center">
       <div className="section">
-          <div className="data guesses">Player: <span> Insert Player Name Here</span>
-              <ul>
-                  <li>DB/WebSocket update 1</li>
-                  <li>DB/WebSocket update 2</li>
-                  <li>DB/WebSocket update 3</li>
-              </ul>
-          </div>
+          <Players username={props.username}/>
           <br />
           <img src="starting_image.png" alt="game image" className="responsive"></img>
       </div>
