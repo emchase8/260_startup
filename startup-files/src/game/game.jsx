@@ -5,6 +5,8 @@ import '../app.css';
 import {Players} from './players'
 
 export function Game(props) {
+  // choose random word in const[word, setWord] thing that can be reset on reset but SHOULD NOT change otherwise
+  
   const [image, setImage] = useState("starting_image.png"); //image updator
   const [guess, setGuess] = useState([]); //all guesses
   const [wrong_guess, setWrongGuess] = useState([]); //wrong guesses
@@ -40,10 +42,10 @@ export function Game(props) {
               </div>
               {/* follow same pattern as login to catch input and use it */}
               <Button className="btn btn-warning" type="submit" style={{marginBottom: '1em'}}>Submit Guess</Button>
-              {/* how the heck do i do this? */}
+              {/* how the heck do i do this? probably just a function to reset everything to be above*/}
               <Button className="btn btn-secondary" type="submit">Restart Game</Button>
           </div>
-          {/* function to update word above */}
+          {/* function to update word will be above */}
           <div className="guess guesses">Word: <span className="word">__ __ __ __ __ __</span> (3rd party word generator will be used, if I can figure that out)</div>
       </div>
     </main>
