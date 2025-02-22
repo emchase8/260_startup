@@ -2,24 +2,36 @@ import React, { use, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import './game.css';
 import '../app.css';
-import {Players} from './players'
+import {Players} from './players';
+import {GameEvent, GameNotify} from './GameNotify';
 
 export function Game(props) {
-  // choose random word in const[word, setWord] thing that can be reset on reset but SHOULD NOT change otherwise
+  const word_choices = ['ACCEPT', 'BRIDGE', 'CHANCE', 'DURING', 'EITHER', 'FABRIC', 'GAINED', 'HACKED', 'IGLOOS', 'JABBED', 'KABALA', 'LABELS', 'MACAWS', 'NACHOS', 'OBLIGE', 'PACIFY', 'QUAILS', 'RAFTER', 'SABBAT', 'TABLES', 'UGLIER', 'VACANT', 'WACKOS', 'XENIAL', 'YACHTS', 'ZAFFER']
   
-  const [image, setImage] = useState("new_starting_image.png"); //image updator
+  async function choose_word(word_choices) {
+    const i = Math.floor(Math.random() * word_choices.length);
+    const choosen_word = word_choices[i];
+    const letter_list = [];
+    for (let j = 0; j < choosen_word.length; j++) {
+      letter_list.push(choosen_word[j])
+    }
+    return letter_list
+  }
+
+  const [image, setImage] = useState("new_starting_image.png"); 
   const [current_guess, setCurrentGuess] = useState('');
-  const [right_guesses, setRightGuesses] = useState([]); //all guesses
-  const [wrong_guesses, setWrongGuesses] = useState([]); //wrong guesses
-  const [word, setWord] = useState(['m', 'a', 'n', 'd', 'o', 's']) //the actual word, need to set that somehow
+  const [right_guesses, setRightGuesses] = useState([]); 
+  const [wrong_guesses, setWrongGuesses] = useState([]); 
+  const [word, setWord] = useState(choose_word(word_choices)) 
   const [display_word, setDisplayWord] = useState("__ __ __ __ __ __")
+  //SCORES WOMAN, FIGURE OUT HOW THOSE WORK
 
   async function reset() {
     setImage("new_starting_image.png");
     setCurrentGuess('');
     setRightGuesses([]);
     setWrongGuesses([]);
-    //call a new random word
+    setWord(choose_word(word_choices));
     setDisplayWord("__ __ __ __ __ __");
   }
 
@@ -77,7 +89,7 @@ export function Game(props) {
           <div className="guess">
               <div className="input-group mb-3">
                   <span className="input-group-text">Guess: </span>
-                  <input className="form-control" type="text" onChange={(e) => setCurrentGuess(e.target.value)} placeholder="type your guess here" />
+                  <input className="form-control" type="text" value={current_guess} onChange={(e) => setCurrentGuess(e.target.value)} placeholder="type your guess here" />
               </div>
               {/* follow same pattern as login to catch input and use it */}
               <Button className="btn btn-warning" type="submit" style={{marginBottom: '1em'}} onClick={() => handle_guess()}>Submit Guess</Button>
