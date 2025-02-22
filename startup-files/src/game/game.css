@@ -1,7 +1,10 @@
 .responsive {
-    max-width: 50%;
+    max-width: 75%;
     height: auto;
     display: flex;
+    background-color: rgb(135, 100, 1);
+    padding: 15px;
+    border-radius: 5px;
 }
 
 .section {
