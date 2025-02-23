@@ -6,6 +6,7 @@ import {Players} from './players';
 import {GameEvent, GameNotify} from './GameNotify';
 
 export function Game(props) {
+  const user_name = props.username
   const word_choices = ['ACCEPT', 'BRIDGE', 'CHANCE', 'DURING', 'EITHER', 'FABRIC', 'GAINED', 'HACKED', 'IGLOOS', 'JABBED', 'KABALA', 'LABELS', 'MACAWS', 'NACHOS', 'OBLIGE', 'PACIFY', 'QUAILS', 'RAFTER', 'SABBAT', 'TABLES', 'UGLIER', 'VACANT', 'WACKOS', 'XENIAL', 'YACHTS', 'ZAFFER']
   
   function choose_word(word_choices) {
@@ -22,8 +23,8 @@ export function Game(props) {
   const [current_guess, setCurrentGuess] = useState('');
   const [right_guesses, setRightGuesses] = useState([]); 
   const [wrong_guesses, setWrongGuesses] = useState([]); 
-  const [word, setWord] = useState(choose_word(word_choices)) 
-  const [display_word, setDisplayWord] = useState("__ __ __ __ __ __")
+  const [word, setWord] = useState(choose_word(word_choices)); 
+  const [display_word, setDisplayWord] = useState("__ __ __ __ __ __");
   const [updated_word, setUpdatedWord] = useState(display_word);
   //SCORES WOMAN, FIGURE OUT HOW THOSE WORK
 
@@ -34,6 +35,8 @@ export function Game(props) {
     setWrongGuesses([]);
     setWord(choose_word(word_choices));
     setDisplayWord("__ __ __ __ __ __");
+    setUpdatedWord("__ __ __ __ __ __");
+    GameNotify.broadcastEvent(user_name, GameEvent.Start, {});
   }
 
   async function handle_guess() {
@@ -51,6 +54,7 @@ export function Game(props) {
       if (!updated_word.includes('__')) {
         console.log('you won!');
         setImage('you_won.png');
+        save_score((right_guesses.length + wrong_guesses.length));
       }
     } else if (current_guess != '') {
       setWrongGuesses((prev) => 
@@ -76,6 +80,36 @@ export function Game(props) {
     }
   }
 
+  async function save_score(winning_score) {
+    const date = new Date().toLocaleDateString();
+    const new_score = {name: user_name, score: winning_score, date: date};
+    GameNotify.broadcastEvent(user_name, GameEvent.End, new_score);
+    update_local_scoreboard(new_score);
+  }
+
+  function update_local_scoreboard(new_score) {
+    let scores = [];
+    const score_text = localStorage.getItem('scores');
+    if (score_text) {
+      scores = JSON.parse(score_text);
+    }
+    let found = false;
+    for (const [i, prev_score] of scores.entries()) {
+      if (new_score.score > prev_score.score) {
+        scores.splice(i, 0, new_score);
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      scores.push(new_score);
+    }
+    if (scores.length > 10) {
+      scores.length = 10;
+    }
+    localStorage.setItem('scores', JSON.stringify(scores));
+  }
+
   return (
     <main className="container-fluid text-center">
       <div className="section">
@@ -96,9 +130,10 @@ export function Game(props) {
                   <input className="form-control" type="text" value={current_guess} onChange={(e) => setCurrentGuess(e.target.value)} placeholder="type your guess here" />
               </div>
               <Button className="btn btn-warning" type="submit" style={{marginBottom: '1em'}} onClick={() => handle_guess()} disabled={!updated_word.includes('__')}>Submit Guess</Button>
-              <Button className="btn btn-secondary" type="submit" onClick={() => reset()} disabled={!wrong_guesses.length || !right_guesses.length}>Restart Game</Button>
+              <Button className="btn btn-secondary" type="submit" onClick={() => reset()} disabled={!(updated_word.includes('__') === false || wrong_guesses.length > 0)}>Restart Game</Button>
           </div>
-          <div className="guess guesses">Word: <span className="word">{display_word}</span> (3rd party word generator will be used, if I can figure that out)</div>
+          {/* (3rd party word generator will be used, if I can figure that out) */}
+          <div className="guess guesses" style={{fontSize: '2vw'}}>Word: <span className="word">{display_word}</span></div>
       </div>
     </main>
   );
