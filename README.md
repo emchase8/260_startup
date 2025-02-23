@@ -113,8 +113,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [x] **All functionality implemented or mocked out** - All parts of the app function as intened, with placeholders for DB and websocket. You can login, play the game, save scores, and see games events from other players.
+- [x] **Hooks** - React hooks are used throughout the app in order for reactivity to work.
 
 ## 🚀 Service deliverable
 
