@@ -23,6 +23,7 @@ export function Game(props) {
   const [current_guess, setCurrentGuess] = useState('');
   const [right_guesses, setRightGuesses] = useState([]); 
   const [wrong_guesses, setWrongGuesses] = useState([]); 
+  // use effect for setting initial word? for 3rd party api call?
   const [word, setWord] = useState(choose_word(word_choices)); 
   const [display_word, setDisplayWord] = useState("__ __ __ __ __ __");
   const [updated_word, setUpdatedWord] = useState(display_word);
@@ -113,12 +114,14 @@ export function Game(props) {
   return (
     <main className="container-fluid text-center">
       <div className="section">
+          {/* make this section smaller? */}
           <Players username={props.username}/>
           <br />
           <img src={image} alt="game image" className="responsive"></img>
       </div>
       <br />
       <div className="section">
+          {/* wrap these? */}
           <div className="guess guesses">Wrong Guesses
               <ul>
                   {wrong_guesses.map((w_guess, index) => (<li key = {index}>{w_guess}</li>))}
@@ -127,6 +130,7 @@ export function Game(props) {
           <div className="guess">
               <div className="input-group mb-3">
                   <span className="input-group-text">Guess: </span>
+                  {/* make it clear that it's just a letter */}
                   <input className="form-control" type="text" value={current_guess} onChange={(e) => setCurrentGuess(e.target.value)} placeholder="type your guess here" />
               </div>
               <Button className="btn btn-warning" type="submit" style={{marginBottom: '1em'}} onClick={() => handle_guess()} disabled={!updated_word.includes('__')}>Submit Guess</Button>
