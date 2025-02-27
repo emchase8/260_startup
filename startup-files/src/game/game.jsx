@@ -86,7 +86,7 @@ export function Game(props) {
     GameNotify.broadcastEvent(user_name, GameEvent.End, new_score);
     update_local_scoreboard(new_score);
   }
-  // if scores are equal, earlier date should take precidence
+  // if scores are equal, later date should take precidence? so first is always up for grabs
   function update_local_scoreboard(new_score) {
     let scores = [];
     const score_text = localStorage.getItem('scores');
