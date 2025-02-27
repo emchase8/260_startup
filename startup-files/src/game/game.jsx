@@ -27,7 +27,6 @@ export function Game(props) {
   const [word, setWord] = useState(choose_word(word_choices)); 
   const [display_word, setDisplayWord] = useState("__ __ __ __ __ __");
   const [updated_word, setUpdatedWord] = useState(display_word);
-  //SCORES WOMAN, FIGURE OUT HOW THOSE WORK
 
   async function reset() {
     setImage("new_starting_image.png");
@@ -39,7 +38,7 @@ export function Game(props) {
     setUpdatedWord("__ __ __ __ __ __");
     GameNotify.broadcastEvent(user_name, GameEvent.Start, {});
   }
-
+  // make it so you can't guess the same letter, should also cap score
   async function handle_guess() {
     if (word.includes(current_guess.toUpperCase())) {
       setRightGuesses((prev) => [...prev, current_guess.toUpperCase()]);
@@ -87,7 +86,7 @@ export function Game(props) {
     GameNotify.broadcastEvent(user_name, GameEvent.End, new_score);
     update_local_scoreboard(new_score);
   }
-
+  // if scores are equal, earlier date should take precidence
   function update_local_scoreboard(new_score) {
     let scores = [];
     const score_text = localStorage.getItem('scores');
