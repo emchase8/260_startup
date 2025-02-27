@@ -96,7 +96,7 @@ export function Game(props) {
     }
     let found = false;
     for (const [i, prev_score] of scores.entries()) {
-      if (new_score.score > prev_score.score) {
+      if (new_score.score < prev_score.score) {
         scores.splice(i, 0, new_score);
         found = true;
         break;
