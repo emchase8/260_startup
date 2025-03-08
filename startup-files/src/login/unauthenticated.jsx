@@ -9,13 +9,30 @@ export function Unauthenticated(props) {
     const [display_error, set_display_error] = React.useState(null);
 
     async function login_user() {
-        localStorage.setItem('username', username);
-        props.onLogin(username);
+        login_or_create('/api/auth/login');
+        // localStorage.setItem('username', username);
+        // props.onLogin(username);
     }
 
     async function create_user() {
-        localStorage.setItem('username', username);
-        props.onLogin(username);
+        login_or_create('/api/auth/create');
+        // localStorage.setItem('username', username);
+        // props.onLogin(username);
+    }
+
+    async function login_or_create(endpoint) {
+        const response = fetch(endpoint, {
+            method: 'post',
+            body: JSON.stringify({email: username, password: password}),
+            headers: {'Content-type': 'application/json; charset=UTF-8',},
+        });
+        if (response?.status === 200) {
+            localStorage.setItem('username', username);
+            props.onLogin(username);
+        } else {
+            const body = await response.json();
+            set_display_error(`⚠ Error: ${body.msg}`);
+        }
     }
 
     return (
