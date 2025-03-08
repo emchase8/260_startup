@@ -4,6 +4,8 @@ const express = require('express');
 const uuid = require('uuid');
 const app = express()
 
+const authCookieName = 'token';
+
 //data scruture for users and scores, deleted after each restart, DB will take care of persistent data
 let users = [];
 let scores = [];
@@ -14,11 +16,14 @@ const port = process.argv.length > 2 ? process.argv[2] : 4000;
 //allows backend to read JSON
 app.use(express.json());
 
+//allows cookie parser to track auth tokens
+app.use(cookieParser());
+
 // Serve up the front-end static content hosting
 app.use(express.static('public'));
 
 //differenciating between endpoint calls and frontend calls
-let apiRouter = express.Router();
+var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 //creates a user, gives them a token
@@ -56,7 +61,7 @@ apiRouter.delete('auth/logout', async (req,res) => {
     res.status(204).end();
 });
 
-//verifying a user exists and is authorized
+//verifying a user exists and is authorized, allows endpoints that need auth to be called
 const verifyAuth = async (req, res, next) => {
     const user = await findUser('token', req.cookies[authCookieName]);
     if (user) {
@@ -65,6 +70,46 @@ const verifyAuth = async (req, res, next) => {
         res.status(401).send({msg: 'Unauthorized'});
     }
 };
+
+//getting the scores
+apiRouter.get('/scores', verifyAuth, async (_req, res) => {
+    res.send(scores);
+});
+
+//submits scores to the scores array
+apiRouter.post('/score', verifyAuth, async (req, res) => {
+    scores = updateScores(req.body);
+    res.send(scores)
+});
+
+//error handler, so hopefully things dont break too bad 
+app.use(function (err, req, res, next) {
+    res.status(500).send({type: err.name, message: err.message})
+});
+
+//returns app default page if no path given
+app.use((_req, res) => {
+    res.sendFile('index.html', {root: 'public'});
+});
+
+//actually updates the scores
+function updateScores(new_score) {
+    let found = false;
+    for (const [i, prev_score] in scores.entries()) {
+        if (new_score.score > prev_score.score) {
+            scores.splice(i, 0, new_score);
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        scores.push(new_score);
+    }
+    if (scores.length > 10) {
+        scores.length = 10;
+    }
+    return scores;
+}
 
 //handles actually creating a user and storing them in local storage
 async function createUser(email, password) {
