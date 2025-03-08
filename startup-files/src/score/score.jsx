@@ -6,10 +6,15 @@ export function Score() {
     const [scores, set_scores] = React.useState([]);
 
     React.useState(() => {
-        const scores_text = localStorage.getItem('scores');
-        if (scores_text) {
-            set_scores(JSON.parse(scores_text));
-        }
+        fetch('/api/scores')
+            .then((response) => response.json())
+            .then((scores) => {
+                set_scores(scores);
+            });
+        // const scores_text = localStorage.getItem('scores');
+        // if (scores_text) {
+        //     set_scores(JSON.parse(scores_text));
+        // }
     }, []);
 
     const scores_rows = [];
