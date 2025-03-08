@@ -83,32 +83,37 @@ export function Game(props) {
   async function save_score(winning_score) {
     const date = new Date().toLocaleDateString();
     const new_score = {name: user_name, score: winning_score, date: date};
+    await fetch('/api/score', {
+      method: 'POST', 
+      headers: {'content-type': 'application/json'},
+      body: JSON.stringify(new_score),
+    });
     GameNotify.broadcastEvent(user_name, GameEvent.End, new_score);
-    update_local_scoreboard(new_score);
+    // update_local_scoreboard(new_score);
   }
   // if scores are equal, later date should take precidence? so first is always up for grabs
-  function update_local_scoreboard(new_score) {
-    let scores = [];
-    const score_text = localStorage.getItem('scores');
-    if (score_text) {
-      scores = JSON.parse(score_text);
-    }
-    let found = false;
-    for (const [i, prev_score] of scores.entries()) {
-      if (new_score.score < prev_score.score) {
-        scores.splice(i, 0, new_score);
-        found = true;
-        break;
-      }
-    }
-    if (!found) {
-      scores.push(new_score);
-    }
-    if (scores.length > 10) {
-      scores.length = 10;
-    }
-    localStorage.setItem('scores', JSON.stringify(scores));
-  }
+  // function update_local_scoreboard(new_score) {
+  //   let scores = [];
+  //   const score_text = localStorage.getItem('scores');
+  //   if (score_text) {
+  //     scores = JSON.parse(score_text);
+  //   }
+  //   let found = false;
+  //   for (const [i, prev_score] of scores.entries()) {
+  //     if (new_score.score < prev_score.score) {
+  //       scores.splice(i, 0, new_score);
+  //       found = true;
+  //       break;
+  //     }
+  //   }
+  //   if (!found) {
+  //     scores.push(new_score);
+  //   }
+  //   if (scores.length > 10) {
+  //     scores.length = 10;
+  //   }
+  //   localStorage.setItem('scores', JSON.stringify(scores));
+  // }
 
   return (
     <main className="container-fluid text-center">
