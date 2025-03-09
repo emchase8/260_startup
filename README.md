@@ -120,11 +120,11 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
+- [X] **Node.js/Express HTTP service** - All associated files are now updated for express/HTTP.
+- [x] **Static middleware for frontend** - A auth state allows for interaction between frontend and backend calls.
+- [x] **Calls to third party endpoints** - There are now third party affirmations on my info page.
+- [x] **Backend service endpoints** - There are now service endpoints for backend of login and storage.
+- [x] **Frontend calls service endpoints** - Those backend service calls are now in my frontend for login and score handling.
 
 ## 🚀 DB/Login deliverable
 
