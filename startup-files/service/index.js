@@ -92,7 +92,7 @@ app.use((_req, res) => {
     res.sendFile('index.html', {root: 'public'});
 });
 
-//actually updates the scores
+//actually updates the scores, maybe change it to =< to deal with new scores trumping old?
 function updateScores(new_score) {
     let found = false;
     for (const [i, prev_score] in scores.entries()) {

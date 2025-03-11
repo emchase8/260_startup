@@ -51,6 +51,7 @@ export function Game(props) {
       const updated_word = new_display_word.join(' ');
       setDisplayWord(updated_word);
       setUpdatedWord(updated_word);
+      //make image different if you guessed word but mouse got the cheese
       if (!updated_word.includes('__')) {
         console.log('you won!');
         setImage('you_won.png');
@@ -134,13 +135,13 @@ export function Game(props) {
           <div className="guess">
               <div className="input-group mb-3">
                   <span className="input-group-text">Guess: </span>
-                  {/* make it clear that it's just a letter */}
+                  {/* make it clear that it's just a letter!!! */}
                   <input className="form-control" type="text" value={current_guess} onChange={(e) => setCurrentGuess(e.target.value)} placeholder="type your guess here" />
               </div>
               <Button className="btn btn-warning" type="submit" style={{marginBottom: '1em'}} onClick={() => handle_guess()} disabled={!updated_word.includes('__')}>Submit Guess</Button>
               <Button className="btn btn-secondary" type="submit" onClick={() => reset()} disabled={!(updated_word.includes('__') === false || wrong_guesses.length > 0)}>Restart Game</Button>
           </div>
-          {/* (3rd party word generator will be used, if I can figure that out) */}
+          {/* (make this reactive to size) */}
           <div className="guess guesses" style={{fontSize: '2vw'}}>Word: <span className="word">{display_word}</span></div>
       </div>
     </main>

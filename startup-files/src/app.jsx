@@ -12,7 +12,7 @@ export default function App() {
     const [username, set_username] = React.useState(localStorage.getItem('username') || '');
     const curr_auth_state = username ? AuthState.Authenticated : AuthState.Unauthenticated;
     const [authstate, set_authstate] = React.useState(curr_auth_state);
-    
+    //make nav bar reactive to size
     return (
     <BrowserRouter>
         <div className="body">
