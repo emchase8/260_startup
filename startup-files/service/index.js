@@ -96,7 +96,7 @@ app.use((_req, res) => {
 function updateScores(new_score) {
     let found = false;
     for (const [i, prev_score] in scores.entries()) {
-        if (new_score.score > prev_score.score) {
+        if (new_score.score < prev_score.score) {
             scores.splice(i, 0, new_score);
             found = true;
             break;
