@@ -2,13 +2,14 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const express = require('express');
 const uuid = require('uuid');
-const app = express()
+const app = express();
+const DB = require('./database.js');
 
 const authCookieName = 'token';
 
 //data scruture for users and scores, deleted after each restart, DB will take care of persistent data
-let users = [];
-let scores = [];
+// let users = [];
+// let scores = [];
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -93,22 +94,24 @@ app.use((_req, res) => {
 });
 
 //actually updates the scores, maybe change it to =< to deal with new scores trumping old?
-function updateScores(new_score) {
-    let found = false;
-    for (const [i, prev_score] of scores.entries()) {
-        if (new_score.score < prev_score.score) {
-            scores.splice(i, 0, new_score);
-            found = true;
-            break;
-        }
-    }
-    if (!found) {
-        scores.push(new_score);
-    }
-    if (scores.length > 10) {
-        scores.length = 10;
-    }
-    return scores;
+async function updateScores(new_score) {
+    await DB.add_scores(new_score);
+    return DB.best_scores();
+    // let found = false;
+    // for (const [i, prev_score] of scores.entries()) {
+    //     if (new_score.score < prev_score.score) {
+    //         scores.splice(i, 0, new_score);
+    //         found = true;
+    //         break;
+    //     }
+    // }
+    // if (!found) {
+    //     scores.push(new_score);
+    // }
+    // if (scores.length > 10) {
+    //     scores.length = 10;
+    // }
+    // return scores;
 }
 
 //handles actually creating a user and storing them in local storage
