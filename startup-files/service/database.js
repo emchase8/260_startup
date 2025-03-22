@@ -31,7 +31,29 @@ function best_scores() {
     return cursor.toArray();
 }
 
+//adds a user to the db
+async function add_user(user) {
+    return user_collection.insertOne(user);
+}
+
+//allows user to be found by token
+function get_by_token(token) {
+    return user_collection.findOne({token: token});
+}
+
+function get_by_email(email) {
+    return user_collection.findOne({email: email});
+}
+
+async function update_existing_user(user) {
+    await user_collection.updateOne({email: user.email},{$set: user});
+}
+
 module.exports = {
     add_scores,
     best_scores,
+    add_user,
+    get_by_token,
+    get_by_email,
+    update_existing_user,
 }

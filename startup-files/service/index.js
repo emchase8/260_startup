@@ -38,12 +38,13 @@ apiRouter.post('/auth/create', async (req, res) => {
     }
 });
 
-//login an existing user
+//login an existing user, and updating db with new token
 apiRouter.post('/auth/login', async (req, res) => {
     const user = await findUser('email', req.body.email);
     if (user) {
         if (await bcrypt.compare(req.body.password, user.password)) {
             user.token = uuid.v4();
+            await DB.update_existing_user(user);
             setAuthCookies(res, user.token);
             res.send({email: user.email});
             return;
@@ -57,6 +58,7 @@ apiRouter.delete('/auth/logout', async (req,res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
     if (user) {
         delete user.token;
+        DB.update_existing_user(user);
     }
     res.clearCookie(authCookieName);
     res.status(204).end();
@@ -74,12 +76,13 @@ const verifyAuth = async (req, res, next) => {
 
 //getting the scores
 apiRouter.get('/scores', verifyAuth, async (_req, res) => {
+    const scores = await DB.best_scores();
     res.send(scores);
 });
 
 //submits scores to the scores array
 apiRouter.post('/score', verifyAuth, async (req, res) => {
-    scores = updateScores(req.body);
+    const scores = updateScores(req.body);
     res.send(scores)
 });
 
@@ -114,7 +117,7 @@ async function updateScores(new_score) {
     // return scores;
 }
 
-//handles actually creating a user and storing them in local storage
+//handles actually creating a user and storing them now in db
 async function createUser(email, password) {
     const password_hash = await bcrypt.hash(password, 10);
     const user = {
@@ -122,14 +125,19 @@ async function createUser(email, password) {
         password: password_hash,
         token: uuid.v4(),
     };
-    users.push(user);
+    // users.push(user);
+    await DB.add_user(user);
     return user;
 }
 
 //searches users array to see if user already there
 async function findUser(field, value) {
     if (!value) return null;
-    return users.find((u) => u[field] === value);
+    if (field === 'token') {
+        return DB.get_by_token(value);
+    }
+    return DB.get_by_email(value);
+    // return users.find((u) => u[field] === value);
 }
 
 //sets cookie to an HTTP response?
