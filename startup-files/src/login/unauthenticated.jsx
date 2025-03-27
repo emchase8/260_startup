@@ -40,12 +40,12 @@ export function Unauthenticated(props) {
             <div>
                 <div className="input-group mb-3">
                     {/* <span className="input-group-text">Email:</span> */}
-                    <span className="input-group-text"><img src="email_icon.png" alt="Email"/></span>
+                    <span className="input-group-text"><img src="email_icon.png" alt="Email" height="20em"/></span>
                     <input className="form-control" type="text" value={username} onChange={(e) => set_username(e.target.value)} placeholder="your@email.com"/>
                 </div>
                 <div className="input-group mb-3">
                     {/* <span className="input-group-text">Password:</span> */}
-                    <span className="input-group-text"><img src="password_icon.png" alt="Email"/></span>
+                    <span className="input-group-text"><img src="password_icon.png" alt="Email" height="20em"/></span>
                     <input className="form-control" type="password" onChange={(e) => set_password(e.target.value)} placeholder="password"/>
                 </div>
                 <Button className="btn btn-warning" onClick={() => login_user()} disabled={!username || !password} style={{marginRight: '0.5em'}}>
