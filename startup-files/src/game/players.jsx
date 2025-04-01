@@ -15,13 +15,14 @@ export function Players(props) {
     }, []);
 
     function handle_game_event(event) {
-        set_events((prev_events) => {
-            let new_events = [event, ...prev_events];
-            if (new_events.length > 10) {
-                new_events = new_events.slice(1,10);
-            }
-            return new_events
-        });
+        set_events([...events, event]);
+        // set_events((prev_events) => {
+        //     let new_events = [event, ...prev_events];
+        //     if (new_events.length > 10) {
+        //         new_events = new_events.slice(1,10);
+        //     }
+        //     return new_events
+        // });
     }
 
     function create_messages() {
