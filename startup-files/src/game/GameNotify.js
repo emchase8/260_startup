@@ -18,17 +18,33 @@ const GameEvent = {
   
     constructor() {
       // websocket will replace
-      setInterval(() => {
-        const score = Math.floor(Math.random() * 27);
-        const date = new Date().toLocaleDateString();
-        const userName = 'Telemachus';
-        this.broadcastEvent(userName, GameEvent.End, { name: userName, score: score, date: date });
-      }, 5000);
+      // setInterval(() => {
+      //   const score = Math.floor(Math.random() * 27);
+      //   const date = new Date().toLocaleDateString();
+      //   const userName = 'Telemachus';
+      //   this.broadcastEvent(userName, GameEvent.End, { name: userName, score: score, date: date });
+      // }, 5000);
+      let port = window.location.port;
+      const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+      this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
+      this.socket.onopen = (event) => {
+        this.receiveEvent(new EventMessage('Startup', GameEvent.System, {msg: 'connected'}));
+      };
+      this.socket.onclose = (event) => {
+        this.receiveEvent(new EventMessage('Startup', GameEvent.System, {msg: 'disconnected'}));
+      };
+      this.socket.onmessage = async (msg) => {
+        try {
+          const event = JSON.parse(await msg.data.text());
+          this.receiveEvent(event);
+        } catch {}
+      };
     }
   
     broadcastEvent(from, type, value) {
       const event = new EventMessage(from, type, value);
-      this.receiveEvent(event);
+      this.socket.send(JSON.stringify(event));
+      // this.receiveEvent(event);
     }
   
     addHandler(handler) {
@@ -41,10 +57,16 @@ const GameEvent = {
   
     receiveEvent(event) {
       this.events.push(event);
-  
-      this.handlers.forEach((handler) => {
-        handler(event);
+
+      this.events.forEach((e) => {
+        this.handlers.forEach((handler) => {
+          handler(e)
+        });
       });
+  
+      // this.handlers.forEach((handler) => {
+      //   handler(event);
+      // });
     }
   }
   
