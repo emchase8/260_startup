@@ -7,7 +7,7 @@ import {GameEvent, GameNotify} from './GameNotify';
 
 export function Game(props) {
   const user_name = props.username
-  const word_choices = ['ACCEPT', 'BRIDGE', 'CHANCE', 'DURING', 'EITHER', 'FABRIC', 'GAINED', 'HACKED', 'IGLOOS', 'JABBED', 'KABALA', 'LABELS', 'MACAWS', 'NACHOS', 'OBLIGE', 'PACIFY', 'QUAILS', 'RAFTER', 'SABBAT', 'TABLES', 'UGLIER', 'VACANT', 'WACKOS', 'XENIAL', 'YACHTS', 'ZAFFER']
+  const word_choices = ['ACCEPT', 'ABLAZE', 'BRIDGE', 'BABBLE', 'CHANCE', 'CABINS', 'DURING', 'DABBLE', 'EITHER', 'EBBING', 'FABRIC', 'FAERIE', 'GAINED', 'GAFFER', 'HACKED', 'HUBRIS', 'IGLOOS', 'IDIOCY', 'JABBED', 'JURORS', 'KABALA', 'KNIGHT', 'LABELS', 'LUXURY', 'MACAWS', 'MOTORS', 'NACHOS', 'NOVELS', 'OBLIGE', 'OWLETS', 'PACIFY', 'POUNCE', 'QUAILS', 'QUORUM', 'RAFTER', 'RATIOS', 'SABBAT', 'SWIRLS', 'TABLES', 'TENNIS', 'UGLIER', 'UNSEEN', 'VACANT', 'VERIFY', 'WACKOS', 'WORLDS', 'XENIAL', 'XENONS', 'YACHTS', 'YODELS', 'ZAFFER', 'ZIGZAG']
   
   function choose_word(word_choices) {
     const i = Math.floor(Math.random() * word_choices.length);
@@ -23,7 +23,6 @@ export function Game(props) {
   const [current_guess, setCurrentGuess] = useState('');
   const [right_guesses, setRightGuesses] = useState([]); 
   const [wrong_guesses, setWrongGuesses] = useState([]); 
-  // use effect for setting initial word? for 3rd party api call?
   const [word, setWord] = useState(choose_word(word_choices)); 
   const [display_word, setDisplayWord] = useState("__ __ __ __ __ __");
   const [updated_word, setUpdatedWord] = useState(display_word);
@@ -54,7 +53,11 @@ export function Game(props) {
       //make image different if you guessed word but mouse got the cheese
       if (!updated_word.includes('__')) {
         console.log('you won!');
-        setImage('you_won.png');
+        if (wrong_guesses.length < 4) {
+          setImage('you_won.png');
+        } else {
+          setImage('you_lost.png');
+        }
         save_score((right_guesses.length + wrong_guesses.length));
       }
     } else if (current_guess != '') {
@@ -136,7 +139,7 @@ export function Game(props) {
               <div className="input-group mb-3">
                   <span className="input-group-text">Guess: </span>
                   {/* make it clear that it's just a letter!!! */}
-                  <input className="form-control" type="text" value={current_guess} onChange={(e) => setCurrentGuess(e.target.value)} placeholder="type your guess here" />
+                  <input className="form-control" type="text" value={current_guess} onChange={(e) => setCurrentGuess(e.target.value)} placeholder="guess a letter" />
               </div>
               <Button className="btn btn-warning" type="submit" style={{marginBottom: '1em'}} onClick={() => handle_guess()} disabled={!updated_word.includes('__')}>Submit Guess</Button>
               <Button className="btn btn-secondary" type="submit" onClick={() => reset()} disabled={!(updated_word.includes('__') === false || wrong_guesses.length > 0)}>Restart Game</Button>
