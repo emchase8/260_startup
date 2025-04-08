@@ -58,7 +58,8 @@ export function Game(props) {
         } else {
           setImage('you_lost.png');
         }
-        save_score((right_guesses.length + wrong_guesses.length));
+        // setRightGuesses doesn't update until next call so adding one makes sure score is accurate
+        save_score((right_guesses.length + 1 + wrong_guesses.length));
       }
     } else if (current_guess != '') {
       setWrongGuesses((prev) => 
